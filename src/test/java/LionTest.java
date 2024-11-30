@@ -6,12 +6,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
@@ -59,14 +61,13 @@ public class LionTest {
         );
     }
 
-
     @Test
     public void getFoodTest() throws Exception {
         Lion lion = new Lion("Самец", feline);
         List<String> expectedFood = Arrays.asList("Мясо", "Рыба", "Птица");
         when(feline.getFood("Хищник")).thenReturn(expectedFood);
         List<String> actualFood = lion.getFood();
-        assertEquals(expectedFood, actualFood);
+        MatcherAssert.assertThat(actualFood, equalTo(expectedFood));
     }
-
 }
+
